@@ -19,7 +19,7 @@ class LaunchpadApiTest extends WebTestCase
 	{
 		$client = static::createClient();
 		$this->container = $client->getContainer();
-		$this->api = $this->container->get('percona.launchpad_api');
+		$this->api = $this->container->get('percona.launchpad');
 	}
 
 	public function testServiceExists()
