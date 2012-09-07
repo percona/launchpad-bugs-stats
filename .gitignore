@@ -9,4 +9,8 @@ web/uploads/*
 web/bundles/*
 
 # Configuration files
-app/config/parameters.ini
+app/config/parameters_*.yml
+app/config/parameters_*.ini
+
+# Framework Files
+.idea
