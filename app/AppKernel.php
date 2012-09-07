@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Percona\LaunchpadBugsStats\EngineBundle\PerconaLaunchpadBugsStatsEngineBundle(),
+            new Percona\LaunchpadBugsStats\ModelBundle\PerconaLaunchpadBugsStatsModelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
