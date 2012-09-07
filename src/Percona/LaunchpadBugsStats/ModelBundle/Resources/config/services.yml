@@ -1,0 +1,9 @@
+parameters:
+    percona_launchpad_bugs_stats_model.model.class: Percona\LaunchpadBugsStats\ModelBundle\Services\Model\Model
+
+services:
+    percona.model:
+        class: %percona_launchpad_bugs_stats_model.model.class%
+        arguments: [@doctrine.orm.entity_manager]
+        calls:
+            - [ setLogger, [@logger] ]
