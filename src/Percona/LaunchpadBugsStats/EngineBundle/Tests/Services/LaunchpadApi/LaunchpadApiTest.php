@@ -30,7 +30,7 @@ class LaunchpadApiTest extends WebTestCase
 		);
 	}
 
-	public function testReturnedInfo()
+	public function testMethodGetBugsOfProject()
 	{
 		$projectName = 'percona-server';
 		$bugs = $this->api->getBugsOfProject($projectName);
@@ -47,7 +47,7 @@ class LaunchpadApiTest extends WebTestCase
 		foreach ($bugs as $bug)
 		{
 			# $this->debug($bug);
-			// ToDo: test for 'created' index
+			$this->assertInternalType('object', $bug);
 			$this->assertObjectHasAttributes(
 				array('id', 'status', 'title'),
 				$bug
