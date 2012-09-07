@@ -73,6 +73,35 @@ class LaunchpadApiTest extends WebTestCase
 		$this->assertEquals("2012-08-28T03:22:57.942174+00:00", $bug->date_created);
 	}
 
+	/**
+	 * @group full
+	 */
+	public function testMethodGetFullBugsOfProject()
+	{
+		$projectName = 'percona-xtradb-cluster';
+		$bugs = $this->api->getFullBugsOfProject($projectName);
+		$this->assertInternalType('array', $bugs);
+
+		# Number of bugs of {$projectName} at this moment
+		$minimumNumberOfBugs = 42;
+
+		$this->assertGreaterThanOrEqual(
+			$minimumNumberOfBugs,
+			\count($bugs),
+			"{$projectName} should return at least {$minimumNumberOfBugs} bugs, but got " . \count($bugs)
+		);
+
+		foreach ($bugs as $bug)
+		{
+			# $this->debug($bug);
+			$this->assertInternalType('object', $bug);
+			$this->assertObjectHasAttributes(
+				array('id', 'status', 'title', 'description', 'date_created'),
+				$bug
+			);
+		}
+	}
+
 
 	# ---- Helpers
 

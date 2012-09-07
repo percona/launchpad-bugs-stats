@@ -114,9 +114,41 @@ class LaunchpadApi
 		} else $this->fail("Request error: {$http->response->status_phrase}");
 	}
 
+	/**
+	 * This method merges all the bugs information gathered from the two Launchpad APIs.
+	 * The returned array, contains bugs with the following keys:
+	 * - 'id', 'status', 'title', 'description', 'date_created'
+	 *
+	 * @param $projectName
+	 *
+	 * @return array
+	 */
+	public function getFullBugsOfProject($projectName)
+	{
+		$this->debug(__METHOD__."($projectName)");
+		$bugs = $this->getBugsOfProject($projectName);
+
+		# Iterate over all bugs to expand the information calling a second API
+		foreach ($bugs as $k=>$bug)
+		{
+			$this->debug("Expanding bug#{$bug->id}");
+			$detailedBugInfo = $this->getBugInformation($bug->id);
+			$bugs[$k] = $this->mergeObjects($bug, $detailedBugInfo);
+
+			# Sleep 1 second to prevent getting banned
+			sleep(1);
+		}
+		return $bugs;
+	}
+
 
 	# ---- Private Helpers
 
+
+	private function mergeObjects(\StdClass $o1, \StdClass $o2)
+	{
+		return (object) array_merge((array) $o1, (array) $o2);
+	}
 
 	private function slashCollection($collection, $keys)
 	{
