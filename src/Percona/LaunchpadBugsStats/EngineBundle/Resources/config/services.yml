@@ -1,0 +1,9 @@
+parameters:
+    percona_launchpad_bugs_stats_engine.launchpad_api.class: Percona\LaunchpadBugsStats\EngineBundle\Services\LaunchpadApi\LaunchpadApi
+
+services:
+    percona.launchpad_api:
+        class: %percona_launchpad_bugs_stats_engine.launchpad_api.class%
+        arguments: []
+        calls:
+            - [ setLogger, [@logger] ]
