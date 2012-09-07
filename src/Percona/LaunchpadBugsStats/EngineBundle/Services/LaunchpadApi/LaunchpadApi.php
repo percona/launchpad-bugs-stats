@@ -20,7 +20,7 @@ class LaunchpadApi
 	 */
 	const BASE_URL_BUGS = 'https://bugs.launchpad.net/{project-name}/+bugs/';
 
-
+	const BASE_URL_BUG  = 'https://api.launchpad.net/1.0/bugs/{bug-id}';
 	# ----
 
 
@@ -74,6 +74,41 @@ class LaunchpadApi
 
 		$this->debug("Returning " . \count($all_bugs) . " bugs");
 		return $all_bugs;
+	}
+
+	/**
+	 * Returns an object which contains the bug information as returned by the launchpad REST API
+	 * but filtered to contain only useful information
+	 *
+	 * @param $bugId
+	 *
+	 * @return StdClass
+	 */
+	public function getBugInformation($bugId)
+	{
+		$this->debug(__METHOD__."($bugId)");
+
+		$url = str_replace('{bug-id}', $bugId, self::BASE_URL_BUG);
+		$http = $this->get($url);
+
+		if ( $http->request['wasSuccessful'] )
+		{
+			# $this->debug($http->response['body']);
+			$data = json_decode($http->response['body']);
+
+			if ( $data )
+			{
+
+				$result = $this->slash(
+					$data,
+					array ( 'id', 'title', 'description', 'date_created' )
+				);
+				$this->debug("Got bug #{$result->id}|{$result->date_created}|".\substr($result->title,0,15));
+
+
+			} else $this->fail("Invalid JSON");
+
+		} else $this->fail("Request error: {$http->response->status_phrase}");
 	}
 
 

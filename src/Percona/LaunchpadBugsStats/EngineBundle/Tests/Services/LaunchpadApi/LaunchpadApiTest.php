@@ -55,6 +55,24 @@ class LaunchpadApiTest extends WebTestCase
 		}
 	}
 
+	public function testMethodGetBugInformation()
+	{
+		$bugId = 1042517;
+		$bug = $this->api->getBugInformation($bugId);
+
+		$this->assertInternalType('object', $bug);
+		$this->assertObjectHasAttributes(
+			array ('id', 'title', 'description', 'date_created'),
+			$bug
+		);
+
+		$this->assertEquals($bugId, $bug->id);
+
+
+		# This bug creation ts is: "2012-08-28T03:22:57.942174+00:00"
+		$this->assertEquals("2012-08-28T03:22:57.942174+00:00", $bug->date_created);
+	}
+
 
 	# ---- Helpers
 
