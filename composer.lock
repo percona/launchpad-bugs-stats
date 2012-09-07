@@ -1,5 +1,5 @@
 {
-    "hash": "c2639bd4ac21bfd8d3fd08e114f2f759",
+    "hash": "f1b4c4a0be95546d1fcd6cf77e92d206",
     "packages": [
         {
             "package": "doctrine/common",
@@ -30,6 +30,12 @@
             "version": "2.3.x-dev",
             "source-reference": "4d9f24b2eef3af3a3e76c773994c19bbb0706f88",
             "commit-date": "1346869007"
+        },
+        {
+            "package": "guzzle/guzzle",
+            "version": "dev-master",
+            "source-reference": "03184125383caa148e13748f10886c1501661e39",
+            "commit-date": "1346986930"
         },
         {
             "package": "jms/aop-bundle",
@@ -88,8 +94,8 @@
         {
             "package": "sensio/distribution-bundle",
             "version": "dev-master",
-            "source-reference": "v2.1.0",
-            "commit-date": "1346859132"
+            "source-reference": "98921298951598e8707258cba2b6180b96faa91c",
+            "commit-date": "1347023757"
         },
         {
             "package": "sensio/framework-extra-bundle",
@@ -190,8 +196,8 @@
         {
             "package": "twig/twig",
             "version": "dev-master",
-            "source-reference": "459720ff3b74ee0c0d159277c6f2f5df89d8a4f6",
-            "commit-date": "1346397138"
+            "source-reference": "68b8c4619c5bbe82bd345fe56070dec8c356610a",
+            "commit-date": "1347025342"
         }
     ],
     "packages-dev": null,
