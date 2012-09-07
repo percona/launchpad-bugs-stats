@@ -21,6 +21,8 @@ class LaunchpadApi
 	const BASE_URL_BUGS = 'https://bugs.launchpad.net/{project-name}/+bugs/';
 
 	const BASE_URL_BUG  = 'https://api.launchpad.net/1.0/bugs/{bug-id}';
+
+
 	# ----
 
 
@@ -103,7 +105,8 @@ class LaunchpadApi
 					$data,
 					array ( 'id', 'title', 'description', 'date_created' )
 				);
-				$this->debug("Got bug #{$result->id}|{$result->date_created}|".\substr($result->title,0,15));
+				$this->debug("Got bug #{$result->id}|{$result->date_created}|'".\substr($result->title,0,15)."...'");
+				return $result;
 
 
 			} else $this->fail("Invalid JSON");
