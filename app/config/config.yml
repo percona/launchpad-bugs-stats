@@ -57,3 +57,10 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+# Liip Cache configuration, used by internal LaunchpadApi
+liip_doctrine_cache:
+    namespaces:
+        launchpad:
+            namespace: launchpad
+            type: file_system

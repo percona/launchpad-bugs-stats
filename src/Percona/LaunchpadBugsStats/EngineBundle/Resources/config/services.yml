@@ -4,6 +4,6 @@ parameters:
 services:
     percona.launchpad:
         class: %percona_launchpad_bugs_stats_engine.launchpad_api.class%
-        arguments: []
+        arguments: [@liip_doctrine_cache.ns.launchpad]
         calls:
             - [ setLogger, [@logger] ]

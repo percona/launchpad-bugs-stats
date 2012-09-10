@@ -6,7 +6,9 @@ namespace Percona\LaunchpadBugsStats\EngineBundle\Services\LaunchpadApi;
 use Guzzle\Service\Client as HttpClient;
 
 # Services
-use Symfony\Bridge\Monolog\Logger;
+use
+	Doctrine\Common\Cache as Cache,
+	Symfony\Bridge\Monolog\Logger;
 
 
 # ----
@@ -25,10 +27,14 @@ class LaunchpadApi
 
 	# ----
 
+	/**
+	 * @var Cache
+	 */
+	private $cacher;
 
-	public function __construct()
+	public function __construct($cacher)
 	{
-
+		$this->cacher = $cacher;
 	}
 
 
@@ -57,22 +63,32 @@ class LaunchpadApi
 	public function getBugsOfProject($projectName)
 	{
 		$this->debug(__METHOD__."($projectName)");
-		$all_bugs = array();
 
-		do
+		# Cheching cache first
+		$cache_key = "bugs-{$projectName}";
+		$all_bugs = $this->cacher->fetch($cache_key);
+		if ( ! $all_bugs )
 		{
-			# Request a page of bugs
-			$page = $this->getOnePageOfProjectBugs($projectName, \count($all_bugs));
-			$this->debug("Got " . \count($page['bugs']) . " bugs of {$page['total']}");
+			$all_bugs = array();
 
-			# Filter the data
-			$page_bugs = $this->slashCollection($page['bugs'], array('status', 'title', 'id'));
-			# $this->debug("Filtered Bugs:".\var_export($page_bugs, 1));
+			do
+			{
+				# Request a page of bugs
+				$page = $this->getOnePageOfProjectBugs($projectName, \count($all_bugs));
+				$this->debug("Got " . \count($page['bugs']) . " bugs of {$page['total']}");
 
-			# Merge with all result
-			$all_bugs = array_merge($all_bugs, $page_bugs);
+				# Filter the data
+				$page_bugs = $this->slashCollection($page['bugs'], array('status', 'title', 'id'));
+				# $this->debug("Filtered Bugs:".\var_export($page_bugs, 1));
 
-		} while ( \count($page_bugs) );
+				# Merge with all result
+				$all_bugs = array_merge($all_bugs, $page_bugs);
+
+			} while ( \count($page_bugs) );
+
+			$this->cacher->save($cache_key, $all_bugs, 60*60*24);
+
+		} else $this->debug("Cache hit");
 
 		$this->debug("Returning " . \count($all_bugs) . " bugs");
 		return $all_bugs;
@@ -126,18 +142,31 @@ class LaunchpadApi
 	public function getFullBugsOfProject($projectName)
 	{
 		$this->debug(__METHOD__."($projectName)");
-		$bugs = $this->getBugsOfProject($projectName);
 
-		# Iterate over all bugs to expand the information calling a second API
-		foreach ($bugs as $k=>$bug)
+		# Cheching cache first
+		$cache_key = "bugs-full-{$projectName}";
+		$bugs = $this->cacher->fetch($cache_key);
+		if ( ! $bugs )
 		{
-			$this->debug("Expanding bug#{$bug->id}");
-			$detailedBugInfo = $this->getBugInformation($bug->id);
-			$bugs[$k] = $this->mergeObjects($bug, $detailedBugInfo);
+			$bugs = $this->getBugsOfProject($projectName);
 
-			# Sleep 1 second to prevent getting banned
-			sleep(1);
-		}
+			# Iterate over all bugs to expand the information calling a second API
+			foreach ($bugs as $k=>$bug)
+			{
+				$this->debug("Expanding bug#{$bug->id} {$k}/".\count($bugs));
+				$detailedBugInfo = $this->getBugInformation($bug->id);
+				$bugs[$k] = $this->mergeObjects($bug, $detailedBugInfo);
+
+				# Sleep 1 second to prevent getting banned
+				$sleep_time = 1;
+				$this->debug("Waiting {$sleep_time} seconds to control API load.");
+				sleep($sleep_time);
+			}
+
+			$this->cacher->save($cache_key, $bugs, 60*60*24);
+
+		} else $this->debug("Cache hit");
+
 		return $bugs;
 	}
 
