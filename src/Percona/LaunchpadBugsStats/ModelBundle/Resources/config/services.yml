@@ -1,5 +1,5 @@
 parameters:
-    percona_launchpad_bugs_stats_model.model.class: Percona\LaunchpadBugsStats\ModelBundle\Services\Model\Model
+    percona_launchpad_bugs_stats_model.model.class: Percona\LaunchpadBugsStats\ModelBundle\Service\Model\Model
 
 services:
     percona.model:

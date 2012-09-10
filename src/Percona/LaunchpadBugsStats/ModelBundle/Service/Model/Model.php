@@ -1,6 +1,13 @@
 <?php
 
-namespace Percona\LaunchpadBugsStats\ModelBundle\Services\Model;
+namespace Percona\LaunchpadBugsStats\ModelBundle\Service\Model;
+
+# Services
+use Symfony\Bridge\Monolog\Logger;
+
+
+# ----
+
 
 class Model
 {
@@ -44,4 +51,10 @@ class Model
 	{
 		$this->Logger->err($txt);
 	}
+
+	public function disableLogging()
+	{
+		$this->Logger = NULL;
+	}
+
 }
