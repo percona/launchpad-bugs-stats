@@ -19,8 +19,13 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+            # Percona
             new Percona\LaunchpadBugsStats\EngineBundle\PerconaLaunchpadBugsStatsEngineBundle(),
             new Percona\LaunchpadBugsStats\ModelBundle\PerconaLaunchpadBugsStatsModelBundle(),
+
+            # Vendors
+            new Liip\DoctrineCacheBundle\LiipDoctrineCacheBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

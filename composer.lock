@@ -1,5 +1,5 @@
 {
-    "hash": "f1b4c4a0be95546d1fcd6cf77e92d206",
+    "hash": "52d89deb82849f996c938f5112d8e5c8",
     "packages": [
         {
             "package": "doctrine/common",
@@ -22,8 +22,8 @@
         {
             "package": "doctrine/doctrine-bundle",
             "version": "dev-master",
-            "source-reference": "3600872919186e1a40e8fd556e65f6dca6337cc9",
-            "commit-date": "1346617185"
+            "source-reference": "d3c930599723c8343472a5791b0f5909a4111a73",
+            "commit-date": "1347289964"
         },
         {
             "package": "doctrine/orm",
@@ -34,8 +34,8 @@
         {
             "package": "guzzle/guzzle",
             "version": "dev-master",
-            "source-reference": "03184125383caa148e13748f10886c1501661e39",
-            "commit-date": "1346986930"
+            "source-reference": "e850c7ddba1d08157b9628f6dfed7626ef4407df",
+            "commit-date": "1347038647"
         },
         {
             "package": "jms/aop-bundle",
@@ -70,8 +70,14 @@
         {
             "package": "kriswallsmith/assetic",
             "version": "dev-master",
-            "source-reference": "86b637e9f64ddcbd17d9eda944384812b5836254",
-            "commit-date": "1346695911"
+            "source-reference": "dfbb776288baf9319d1693195af2cb6e00729901",
+            "commit-date": "1347039484"
+        },
+        {
+            "package": "liip/doctrine-cache-bundle",
+            "version": "dev-master",
+            "source-reference": "68121ca6bd1bfc06c8ae4b2edc75488dd2a42de3",
+            "commit-date": "1347124663"
         },
         {
             "package": "monolog/monolog",
@@ -82,8 +88,8 @@
         {
             "package": "monolog/monolog",
             "version": "dev-master",
-            "source-reference": "a929570bb7688b39fefe4106f0ecf0ac35f37647",
-            "commit-date": "1346873566"
+            "source-reference": "e5bf7ba5d1df622b68d004b3c0277bc94286e1b7",
+            "commit-date": "1347105894"
         },
         {
             "package": "sensio/distribution-bundle",
@@ -130,8 +136,8 @@
         {
             "package": "swiftmailer/swiftmailer",
             "version": "dev-master",
-            "source-reference": "e12e4ef3a9d6dd60fb734a01984a6e6627aea764",
-            "commit-date": "1345630910"
+            "source-reference": "c97353b1ebffe25a224146f69d17efe24c093def",
+            "commit-date": "1347083952"
         },
         {
             "package": "symfony/assetic-bundle",
@@ -154,8 +160,8 @@
         {
             "package": "symfony/monolog-bundle",
             "version": "dev-master",
-            "source-reference": "v2.1.0-RC2",
-            "commit-date": "1345557954"
+            "source-reference": "b7318480e6f8bf5579d6b3cd856850302e7ba8d8",
+            "commit-date": "1347283885"
         },
         {
             "package": "symfony/swiftmailer-bundle",
@@ -172,8 +178,8 @@
         {
             "package": "symfony/symfony",
             "version": "2.1.x-dev",
-            "source-reference": "e7059b44c78ca8e1e892adb4d93b5a482f4eb9b3",
-            "commit-date": "1346926323"
+            "source-reference": "597819eff13e2df3671cf3f838f9c1e2664b426e",
+            "commit-date": "1347286221"
         },
         {
             "package": "twig/extensions",
