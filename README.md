@@ -7,9 +7,13 @@ Gathers information of our projects bugs reports in launchpad and generates repo
 Python Api
 ==========
 
-Located at /launchpad-api/pull_bugs.py
+Located at **/launchpad-api/pull_bugs.py**
 It gathers bugs information from launchpad REST API and save the data to a JSON file.
 
 Usage:
 
-./pull_bugs.py -o bugs-{launchpad-project-name}.json {launchpad-project-name}
+    ./pull_bugs.py -o {output-file}.json {launchpad-project-name}
+
+Or for more convenience, you can use the pull-all-bugs.sh script to pull all the projects bugs at once.
+
+    ./pull-all-bugs.sh
