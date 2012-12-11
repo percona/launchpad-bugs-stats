@@ -56,8 +56,17 @@ if __name__ == '__main__':
         'just-me', 'production',
         version='devel')
     pillar = lp.projects[project]
-    sys.stdout.write(time.strftime("%m/%d/%Y %H:%M")+",")
+    sep=','
+    sys.stdout.write(time.strftime("%m/%d/%Y")+sep)
     for i in my_bug_statuses:
-    	fixed_bugtasks = pillar.searchTasks( status=[i])
-    	sys.stdout.write(str(len(fixed_bugtasks))+",")
+    	fixed_bugtasks = pillar.searchTasks( status=[i] )
+    	sys.stdout.write(str(len(fixed_bugtasks))+sep)
+    fixed_bugtasks = pillar.searchTasks( status=['Confirmed','Triaged','In Progress'], importance=['Critical'])
+    sys.stdout.write(str(len(fixed_bugtasks))+sep)
+    fixed_bugtasks = pillar.searchTasks( status=['Confirmed','Triaged','In Progress'], importance=['High'])
+    sys.stdout.write(str(len(fixed_bugtasks))+sep)
+    fixed_bugtasks = pillar.searchTasks( status=['Fix Committed','Fix Released'], importance=['Critical'])
+    sys.stdout.write(str(len(fixed_bugtasks))+sep)
+    fixed_bugtasks = pillar.searchTasks( status=['Fix Committed','Fix Released'], importance=['High'])
+    sys.stdout.write(str(len(fixed_bugtasks)))
     print("")
